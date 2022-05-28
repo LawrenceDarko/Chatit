@@ -1,5 +1,4 @@
 const express = require('express');
-const { chats } = require('./data/data');
 const { dataConnection } = require('./data/db');
 // const { registerUser, authenticateUser } = require('./routes/userRoutes');
 const userRoutes = require('./routes/userRoutes');

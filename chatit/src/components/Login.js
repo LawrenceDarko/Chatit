@@ -34,6 +34,7 @@ const Login = () => {
                     localStorage.setItem("user info", JSON.stringify(res.data))
 
                     navigate("/")
+                    window.location.reload();
                     console.log("User successfully logged in")
                 })
                

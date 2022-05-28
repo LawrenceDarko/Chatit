@@ -72,11 +72,15 @@ const Chat = () => {
   
     // console.log(chatdata)
     console.log("Single info: ",singleChat)
+    const handleLogout = () => {
+      localStorage.removeItem("user info");
+      window.location.reload();
+    }
 
   return (
     <ChatWrapper>
       <ChatHeader>
-
+        <button onClick={() => handleLogout()}>Logout</button>
       </ChatHeader>
       <ChatBody>
       
@@ -110,6 +114,21 @@ const ChatHeader = styled.div`
   width: 100%;
   height: 13%;
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.4);
+
+  > button {
+    margin-left: 80%;
+    /* margin-right: auto; */
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 10px;
+    border: none;
+    background-color: #FF6140;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+  }
 `
 const ChatBody = styled.div`
   display: flex;
@@ -177,5 +196,5 @@ const ChatItem = styled.div`
   color: ${props => props.msgfrom === props.myId ? "#333" : "white"};
   border-radius: 10px;
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.4);
-  margin-left: ${props => props.msgfrom === props.myId ? "50%" : "10px"};
+  margin-left: ${props => props.msgfrom === props.myId ? "45%" : "10px"};
 `

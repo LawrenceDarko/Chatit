@@ -1,0 +1,1 @@
+mongodb+srv://lawrence:Owuradarko1@cluster0.wzsvwil.mongodb.net/?retryWrites=true&w=majority

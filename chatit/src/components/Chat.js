@@ -85,7 +85,7 @@ const Chat = () => {
         <button onClick={() => handleLogout()}>Logout</button>
       </ChatHeader>
       <ChatBody>
-      {singleChat.map(info => (<ChatItemWrapper  msgfrom={info.sender} myId={userInfo._id} key={ info._id}>
+      {singleChat?.map(info => (<ChatItemWrapper  msgfrom={info.sender} myId={userInfo._id} key={ info._id}>
         <ChatItem msgfrom={info.sender} myId={userInfo._id} >
           <p>{info.text}</p>
           <p style={{fontSize: "9px"}}>{format(info.createdAt)}</p>

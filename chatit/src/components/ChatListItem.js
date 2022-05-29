@@ -56,7 +56,7 @@ const ChatListItem = () => {
     return (
         data.map(info => (<ItemWrapper onClick={()=>handleFunc(info._id, info.name)} key={ info._id}>
             <UserProfile>
-                <UserProfileImage src="/jennie.jpg" />
+                <UserProfileImage src="/avt.png" />
             </UserProfile>
             <ChatInfo>
                 <p style={{ color: '#fff', fontWeight: '500' }}>{info.name}</p>

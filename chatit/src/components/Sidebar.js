@@ -11,7 +11,7 @@ const userInfo = JSON.parse(localStorage.getItem("user info"));
     <SidebarWrapper>
         <Profile>
             <ProfilePicName>
-                <img alt="" src="/jennie.jpg" />
+                <img alt="" src="/avt.png" />
                 <p>{userInfo.name}</p>
                 <FiberManualRecordIcon style={{height: 10, width: 10, color: 'green', marginLeft: 10, }} />
                 <MailIcon style={{height: 20, width: 40, color: '#fff', marginLeft: 10}}/>

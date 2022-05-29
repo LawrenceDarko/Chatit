@@ -4,7 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon backend/server.js"
+    "start": "nodemon backend/server.js",
+    "build": "cd chatit && npm run build",
+    "install-client": "cd chatit && npm install",
+    "heroku-postbuild": "npm run install-client && node backend/server.js"
   },
   "author": "Baah Lawrence Darko",
   "license": "ISC",

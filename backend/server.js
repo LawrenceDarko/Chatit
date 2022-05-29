@@ -4,7 +4,6 @@ const { dataConnection } = require('./data/db');
 const userRoutes = require('./routes/userRoutes');
 const messageRoutes = require('./routes/messages');
 const conversationRoutes = require('./routes/conversations');
-const { application } = require('express');
 
 dataConnection();
 const app = express();
@@ -16,20 +15,19 @@ app.use('/api/conversations', conversationRoutes);
 
 if(process.env.NODE_ENV === 'production') {
     app.use(express.static('chatit/build'));
-
     const path = require('path');
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'chatit', 'build', 'index.html'));
     });
 }
 else{
-    app.get('/', (req, res) => {
-        res.send('Hello World');
-    });
+    app.get("/", (req, res) => {
+        res.send("Hello World");
+    }); 
 }
 
-PORT = process.env.PORT || 5000;
 
-app.listen (PORT, () => {
-    console.log(`Server started on port ${PORT}`);
-});
+const PORT = process.env.PORT || 8000;
+
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+

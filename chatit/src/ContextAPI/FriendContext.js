@@ -1,13 +1,14 @@
-import { createContext, useEffect, useState, useContext } from "react";
+import { createContext, useState } from "react";
 
 const FriendIdContext = createContext();
 
 export function FriendIdProvider ({children}) {
 
     const [friendId, setFriendId] = useState(null)
+    const [friendName, setFriendName] = useState(null)
 
     return(
-        <FriendIdContext.Provider value={{friendId, setFriendId }}>
+        <FriendIdContext.Provider value={{friendId, setFriendId, setFriendName, friendName }}>
             {children}
         </FriendIdContext.Provider>
     );

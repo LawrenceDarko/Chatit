@@ -5,7 +5,7 @@ import FriendIdContext from "../ContextAPI/FriendContext"
 
 const ChatListItem = () => {
 
-    const { setFriendId } = useContext(FriendIdContext);
+    const { setFriendId, setFriendName } = useContext(FriendIdContext);
 
     // console.log(id)
 
@@ -14,7 +14,7 @@ const ChatListItem = () => {
     const userInfo = JSON.parse(localStorage.getItem("user info"));
 
 
-    const handleFunc = async (id) => { 
+    const handleFunc = async (id, fname) => { 
         const userChatData = await axios.get("/api/conversations/" + userInfo._id);
         // setChatData(userChatData.data);
         console.log("User conversations: ",userChatData.data)
@@ -37,6 +37,7 @@ const ChatListItem = () => {
        
         // console.log(id)
         setFriendId(id)
+        setFriendName(fname)
      }
 
 
@@ -53,7 +54,7 @@ const ChatListItem = () => {
 
 
     return (
-        data.map(info => (<ItemWrapper onClick={()=>handleFunc(info._id)} key={ info._id}>
+        data.map(info => (<ItemWrapper onClick={()=>handleFunc(info._id, info.name)} key={ info._id}>
             <UserProfile>
                 <UserProfileImage src="/jennie.jpg" />
             </UserProfile>

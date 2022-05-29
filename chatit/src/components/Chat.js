@@ -2,10 +2,11 @@ import React, {useEffect, useState, useContext} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import FriendIdContext from "../ContextAPI/FriendContext"
+import  { format } from 'timeago.js';
 
 const Chat = () => {
 
-  const { friendId } = useContext(FriendIdContext);
+  const { friendId, friendName } = useContext(FriendIdContext);
   console.log("Friend ID: ",friendId)
 
   const [chatdata, setChatData] = useState([]);
@@ -80,14 +81,16 @@ const Chat = () => {
   return (
     <ChatWrapper>
       <ChatHeader>
+        <p>{friendName}</p>
         <button onClick={() => handleLogout()}>Logout</button>
       </ChatHeader>
       <ChatBody>
-      
-        {singleChat.map(info => (<ChatItem msgfrom={info.sender} myId={userInfo._id} key={ info._id}>
+      {singleChat.map(info => (<ChatItemWrapper  msgfrom={info.sender} myId={userInfo._id} key={ info._id}>
+        <ChatItem msgfrom={info.sender} myId={userInfo._id} >
           <p>{info.text}</p>
-        </ChatItem>))}
-
+          <p style={{fontSize: "9px"}}>{format(info.createdAt)}</p>
+        </ChatItem>
+      </ChatItemWrapper>))}
         
       </ChatBody>
       <ChatInput>
@@ -111,13 +114,13 @@ const ChatHeader = styled.div`
   display: flex;
   flex-direction: row;
   /* border: 1px solid red; */
+  justify-content: space-between;
   width: 100%;
   height: 13%;
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.4);
 
   > button {
-    margin-left: 80%;
-    /* margin-right: auto; */
+    /* margin-left: 80%; */
     margin-top: auto;
     margin-bottom: auto;
     padding: 10px;
@@ -129,6 +132,15 @@ const ChatHeader = styled.div`
     color: #fff;
     cursor: pointer;
   }
+
+  > p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    /* color: #fff; */
+    margin-left: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
 `
 const ChatBody = styled.div`
   display: flex;
@@ -138,7 +150,7 @@ const ChatBody = styled.div`
   height: 74%;
 
   overflow-y: scroll;
-  -ms-overflow-style: none;  /* IE and Edge */
+  -ms-overflow-style: none; 
   scrollbar-width: none;
   scroll-behavior: smooth;
   /* border-right: 1px solid #e5e5e5; */
@@ -182,19 +194,33 @@ const ChatInput = styled.div`
     }
 `
 const ChatItem = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  /* flex-direction: row; */
   /* border: 1px solid red; */
-  width: auto;
-  max-width: 50%;
+  width: fit-content;
+  /* max-width: 50%; */
   height: auto;
   padding: 10px;
   margin-top: 10px;
   background-color: ${props => props.msgfrom === props.myId ? "#D3D3D3" : "#007AFF"};
   color: ${props => props.msgfrom === props.myId ? "#333" : "white"};
-  border-radius: 10px;
+  border-radius: 30px;
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.4);
-  margin-left: ${props => props.msgfrom === props.myId ? "45%" : "10px"};
+  margin-left: ${props => props.msgfrom === props.myId ? "auto" : "10px"};
+  margin-right: ${props => props.msgfrom === props.myId ? "10px" : "auto"};
+
+  > p {
+    font-size: 1rem;
+    margin-left: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+    /* width: auto; */
+    /* border: 1px solid red; */
+  }
+`
+const ChatItemWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  width: 100%;
+  /* border: 1px solid #e5e5e5; */
+  align-items: ${props => props.msgfrom === props.myId ? "flex-end" : "flex-start"};;
 `

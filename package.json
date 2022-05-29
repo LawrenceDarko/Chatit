@@ -5,9 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon backend/server.js",
-    "build": "cd chatit && npm run build",
-    "install-client": "cd chatit && npm install",
-    "heroku-postbuild": "npm run install-client && node backend/server.js"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix chatit && npm run build --prefix chatit"
   },
   "author": "Baah Lawrence Darko",
   "license": "ISC",

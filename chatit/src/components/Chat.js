@@ -95,7 +95,7 @@ const Chat = () => {
       </ChatBody>
       <ChatInput>
         {friendId ? <><input  type="text" value={newMessage} onChange={(e)=>{setnewMessage(e.target.value)}} placeholder="Type a message..." />
-        <button onClick={handleNewMsg}>Send</button></>:<p>Select a User to Start Conversation</p>}
+        {!newMessage?<button style={{backgroundColor:"#C5F8C2", color:"#D5D8D5"}} disabled>Send</button>:<button onClick={handleNewMsg}>Send</button>}</>:<p>Select a User to Start Conversation</p>}
       </ChatInput>
     </ChatWrapper>
   )

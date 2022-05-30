@@ -6,4 +6,4 @@ For Comprehensive explanation of the Logic behind the project check the Project 
 
 The backend is in the backend folder whilst the frontend is in the chatit folder
 
-Socket.io is yet to be implemented and so Messages are being pulled from the database i.e the receiver needs to start typing to re-render the state in order to pull the messages
+Socket.io has been implemented now but there is a bug i'm still fixing so the code is not yet push to the repository

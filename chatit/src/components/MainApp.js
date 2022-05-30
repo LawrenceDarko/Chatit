@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
 import Chat from './Chat';
 import Sidebar from './Sidebar';
 import styled from 'styled-components';
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const MainApp = () => {
 

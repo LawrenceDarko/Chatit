@@ -29,5 +29,22 @@ else{
 
 const PORT = process.env.PORT || 8000;
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+const server = app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+
+const io = require('socket.io')(server, {
+    pingTimeout: 60000,
+    // pingInterval: 25000,
+    // transports: ['websocket'],
+    cors: {
+        origin: 'http://localhost:3000',
+    }
+});
+
+io.on('connection', (socket) => {
+    console.log('a user connected');
+    io.emit('message', 'hello people');
+    // socket.on('disconnect', () => {
+    //   console.log('user disconnected');
+    // });
+  });
 

@@ -45,3 +45,21 @@ Display the messages
 
 Use Socket.io for Real-time interactions
 ****************************************
+Cheat Sheet
+
+From Server to Client
+*********************
+    Alway use io
+
+    Send to Every Client - io.emit
+    Send to One Client - io.to(SocketID).emit
+
+Take from Client
+    socket.on
+
+From Client to Server
+*********************
+Always use socket
+
+Send to Server - socket.emit
+Take from Server - socket.on  

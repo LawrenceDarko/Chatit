@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon backend/server.js", 
+    "start": "nodemon backend/server.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix chatit && npm run build --prefix chatit"
   },
   "author": "Baah Lawrence Darko",
@@ -17,6 +17,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.4",
     "nodemon": "^2.0.16",
+    "socket.io": "^4.5.1",
     "timeago.js": "^4.0.2"
   }
 }

@@ -22,9 +22,7 @@ const Login = () => {
         else{
             try {
                 const config = {
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
+                    headers: {"Content-Type": "application/json"},
                    
                 };
                 axios.post("/api/users/login" ,{email, password}, config)

@@ -55,11 +55,12 @@ From Server to Client
     Send to One Client - io.to(SocketID).emit
 
 Take from Client
+****************
     socket.on
 
 From Client to Server
 *********************
-Always use socket
+use socket
 
 Send to Server - socket.emit
 Take from Server - socket.on  

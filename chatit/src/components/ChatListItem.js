@@ -49,7 +49,7 @@ const ChatListItem = () => {
 
     useEffect(() => {
         fetchData()
-    }, [])
+    },[])
 
 
 

@@ -1,8 +1,9 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState, useContext, useRef } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import FriendIdContext from "../ContextAPI/FriendContext"
 import  { format } from 'timeago.js';
+import { io } from 'socket.io-client';
 
 const Chat = () => {
 
@@ -13,10 +14,26 @@ const Chat = () => {
   const [singleChatId, setSingleChatId] = useState(null)
   const [singleChat, setSingleChat] = useState([])
   const [newMessage, setnewMessage] = useState('')
+  const [socket, setSocket] = useState(null)
 
 
   const userInfo = JSON.parse(localStorage.getItem("user info"));
   // console.log(userInfo)
+
+  const chatRef = useRef(null);
+
+  
+
+  useEffect(() => {
+    setSocket(io('ws://localhost:8000'))
+  }, [])
+
+  // useEffect(() => {
+  //   socket.on('message', data => {
+  //     console.log("Chat message: ",data)
+  //     // setChatData(data)
+  //   })
+  // },[socket])
   
   
   const handleNewMsg = async (e) => {
@@ -63,13 +80,22 @@ const Chat = () => {
   }
 
   useEffect(() => {
+    chatRef.current.scrollIntoView({
+        behavior: "smooth"
+    });
+  }) //,[newMessage, userInfo._id] Uncomment this to scroll to bottom on new message
+
+  useEffect(() => {
     fetchChats();
     fetchMessages();
     // remove the following line and the newMessage dependency if you want no error in the console
     // handleNewMsg();
   }, [userInfo._id, friendId, singleChatId, newMessage])
   
-
+  useEffect(() => {
+    console.log("This is where socket will be")
+  }, [socket])
+  
   
     // console.log(chatdata)
     console.log("Single info: ",singleChat)
@@ -89,12 +115,13 @@ const Chat = () => {
         <ChatItem msgfrom={info.sender} myId={userInfo._id} >
           <p>{info.text}</p>
           <p style={{fontSize: "9px"}}>{format(info.createdAt)}</p>
+          
         </ChatItem>
       </ChatItemWrapper>))}
-        
+      <ChatBottom ref={chatRef}/>
       </ChatBody>
       <ChatInput>
-        {friendId ? <><input  type="text" value={newMessage} onChange={(e)=>{setnewMessage(e.target.value)}} placeholder="Type a message..." />
+        {friendId ? <><input type="text" value={newMessage} onChange={(e)=>{setnewMessage(e.target.value)}} placeholder="Type a message..." />
         {!newMessage?<button style={{backgroundColor:"#C5F8C2", color:"#D5D8D5"}} disabled>Send</button>:<button onClick={handleNewMsg}>Send</button>}</>:<p>Select a User to Start Conversation</p>}
       </ChatInput>
     </ChatWrapper>
@@ -222,5 +249,9 @@ const ChatItemWrapper = styled.div`
   /* border: 1px solid red; */
   width: 100%;
   /* border: 1px solid #e5e5e5; */
-  align-items: ${props => props.msgfrom === props.myId ? "flex-end" : "flex-start"};;
+  align-items: ${props => props.msgfrom === props.myId ? "flex-end" : "flex-start"};
+`
+
+const ChatBottom = styled.div`
+  margin-top: 100px;
 `
